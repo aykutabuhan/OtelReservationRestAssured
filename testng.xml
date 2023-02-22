@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="/Users/aykutabuhan/IdeaProjects/OtelReservationRestAssured">
+        <classes>
+            <class name="tests.PostAuthenticationTest"/>
+            <class name="tests.PostBookingBodyTest"/>
+            <class name="tests.GetAllBookingIDTest"/>
+            <class name="tests.GetBookingTest"/>
+            <class name="tests.PutUpdateBookingTest"/>
+        </classes>
+    </test>
+</suite>
