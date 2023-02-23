@@ -7,8 +7,6 @@ import models.request.PostBookingBody;
 import tests.PostAuthenticationTest;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class RestfulBookerHelper extends RestClient {
 
@@ -17,6 +15,7 @@ public class RestfulBookerHelper extends RestClient {
     }
     public Response postAuthentication(){
         PostAuthBody tokenBody =  PostAuthBody.builder().username("admin").password("password123").build();
+
         return post("/auth", null, null, tokenBody);
     }
     public Response postBooking(){
@@ -26,8 +25,6 @@ public class RestfulBookerHelper extends RestClient {
         PostBookingBody bookingBody = PostBookingBody.builder().firstname("Lewis").lastname("Hamilton").totalprice(150)
                                     .depositpaid(true).bookingdates(innerDateBody).additionalneeds("Smoker room").build();
 
-        Map<String, Object> headers = new HashMap<>();
-        headers.put("token", PostAuthenticationTest.getTokenID());
         return post("/booking", null, null, bookingBody);
     }
     public Response getAllBookingID(){
@@ -43,8 +40,22 @@ public class RestfulBookerHelper extends RestClient {
         PostBookingBody updateBody = PostBookingBody.builder().firstname("Alex").lastname("De Souza").totalprice(100)
                 .depositpaid(false).bookingdates(innerDateBody).additionalneeds("Football field").build();
 
-        Map<String, Object> headers = new HashMap<>();
-        headers.put("token", PostAuthenticationTest.getTokenID());
-        return put("/booking/" + indexID, null, headers, updateBody);
+      //  Map<String, Object> headers = new HashMap<>();
+      //  headers.put("Authorization", "Basic YWRtaW46cGFzc3dvcmQxMjM=");
+
+        return put("/booking/" + indexID, null, headers(), updateBody);
+    }
+    public Response deleteBooking(int indexID){
+        //  Map<String, Object> headers = new HashMap<>();
+        // headers.put("Cookie", "token=" + PostAuthenticationTest.getTokenID());
+
+        return delete("/booking/" + indexID, null, headers(), null);
+    }
+
+    public HashMap<String, Object> headers(){
+        HashMap<String, Object> headers = new HashMap<>();
+        headers.put("Cookie", "token=" + PostAuthenticationTest.getTokenID());
+
+        return headers;
     }
 }

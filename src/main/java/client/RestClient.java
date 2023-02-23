@@ -70,7 +70,8 @@ public class RestClient {
         }
         if (body != null) {
             httpRequest.body(body);
-        }        Response response = httpRequest.put(path);
+        }
+        Response response = httpRequest.put(path);
         response.then().log().body();
         return response;
     }
