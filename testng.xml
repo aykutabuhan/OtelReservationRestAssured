@@ -8,6 +8,7 @@
             <class name="tests.GetAllBookingIDTest"/>
             <class name="tests.GetBookingTest"/>
             <class name="tests.PutUpdateBookingTest"/>
+            <class name="tests.DeleteBookingTest"/>
         </classes>
     </test>
 </suite>
