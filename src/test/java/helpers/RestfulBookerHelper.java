@@ -4,11 +4,14 @@ import client.RestClient;
 import io.restassured.response.Response;
 import models.request.PostAuthBody;
 import models.request.PostBookingBody;
-import tests.PostAuthenticationTest;
+import util.PropertyUtil;
 
 import java.util.HashMap;
 
 public class RestfulBookerHelper extends RestClient {
+
+    private static final String CREATED_BOOKING_ID = PropertyUtil.getProperty("bookingID", "bookingID.property");
+    private static final String TOKEN_ID = PropertyUtil.getProperty("tokenID", "token.property");
 
     public RestfulBookerHelper() {
         super("https://restful-booker.herokuapp.com");
@@ -30,10 +33,10 @@ public class RestfulBookerHelper extends RestClient {
     public Response getAllBookingID(){
         return get("/booking", null, null, null);
     }
-    public Response getBookingWithID(int indexID){
-        return get("/booking/" + indexID, null,null,null);
+    public Response getBookingWithID(){
+        return get("/booking/" + CREATED_BOOKING_ID, null,null,null);
     }
-    public Response updateBooking(int indexID){
+    public Response updateBooking(){
         PostBookingBody.BookingDates innerDateBody = PostBookingBody.BookingDates.builder().checkin("2023-06-06")
                 .checkout("2023-06-12").build();
 
@@ -43,18 +46,19 @@ public class RestfulBookerHelper extends RestClient {
       //  Map<String, Object> headers = new HashMap<>();
       //  headers.put("Authorization", "Basic YWRtaW46cGFzc3dvcmQxMjM=");
 
-        return put("/booking/" + indexID, null, headers(), updateBody);
+        System.out.println(headers());
+        return put("/booking/" + CREATED_BOOKING_ID, null, headers(), updateBody);
     }
-    public Response deleteBooking(int indexID){
+    public Response deleteBooking(){
         //  Map<String, Object> headers = new HashMap<>();
         // headers.put("Cookie", "token=" + PostAuthenticationTest.getTokenID());
 
-        return delete("/booking/" + indexID, null, headers(), null);
+        return delete("/booking/" + CREATED_BOOKING_ID, null, headers(), null);
     }
 
     public HashMap<String, Object> headers(){
         HashMap<String, Object> headers = new HashMap<>();
-        headers.put("Cookie", "token=" + PostAuthenticationTest.getTokenID());
+        headers.put("Cookie", "token=" + TOKEN_ID);
 
         return headers;
     }

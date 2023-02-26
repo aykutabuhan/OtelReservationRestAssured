@@ -2,7 +2,6 @@ package tests;
 
 import helpers.RestfulBookerHelper;
 import io.restassured.response.Response;
-import models.response.PostBookingResponse;
 import models.response.PutUpdateBookingResponse;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -12,7 +11,7 @@ public class PutUpdateBookingTest {
 
     @Test
     public void UpdateBookingTest(){
-        Response response = m_helper.updateBooking(PostBookingBodyTest.getBookingid());
+        Response response = m_helper.updateBooking();
 
         Assert.assertEquals(response.as(PutUpdateBookingResponse.class).getFirstname(), "Alex");
         Assert.assertEquals(response.as(PutUpdateBookingResponse.class).getLastname(), "De Souza");

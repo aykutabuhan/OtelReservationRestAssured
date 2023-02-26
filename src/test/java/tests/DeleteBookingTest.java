@@ -10,7 +10,7 @@ public class DeleteBookingTest {
 
     @Test
     public void deleteBooking(){
-        Response response = m_helper.deleteBooking(PostBookingBodyTest.getBookingid());
+        Response response = m_helper.deleteBooking();
 
         response.then().statusCode(201);
     }

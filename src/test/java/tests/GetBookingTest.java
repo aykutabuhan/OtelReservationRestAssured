@@ -17,7 +17,7 @@ public class GetBookingTest {
  */
     @Test
     public void getCreatedBookingTest(){
-        Response response = m_helper.getBookingWithID(PostBookingBodyTest.getBookingid());
+        Response response = m_helper.getBookingWithID();
         response.then().statusCode(200);
     }
 }
